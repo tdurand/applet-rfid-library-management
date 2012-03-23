@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="MacRoman" standalone="no"?>
+<jardesc>
+    <jar path="applet-library-management/applet-library-management.jar"/>
+    <options buildIfNeeded="true" compress="true" descriptionLocation="/applet-library-management/manifest.jardesc" exportErrors="true" exportWarnings="true" includeDirectoryEntries="false" overwrite="false" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
+    <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
+    <selectedProjects/>
+    <manifest generateManifest="false" manifestLocation="/applet-library-management/manifest" manifestVersion="1.0" reuseManifest="true" saveManifest="true" usesManifest="true">
+        <sealing sealJar="true">
+            <packagesToSeal/>
+            <packagesToUnSeal/>
+        </sealing>
+    </manifest>
+    <selectedElements exportClassFiles="true" exportJavaFiles="false" exportOutputFolder="false">
+        <file path="/applet-library-management/.classpath"/>
+        <file path="/applet-library-management/.project"/>
+        <folder path="/applet-library-management/libs"/>
+        <file path="/applet-library-management/.DS_Store"/>
+        <javaElement handleIdentifier="=applet-library-management/src"/>
+    </selectedElements>
+</jardesc>
