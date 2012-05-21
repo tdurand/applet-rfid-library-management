@@ -13,7 +13,6 @@ import br.com.rfidcoe.yarf.device.reader.RFIDReader;
 
 public class RFIDAccess extends Applet {
     
-    public String toDraw;
     public Properties readerProperties;
     public RFIDReader rfidReader;
     private JSObject jso;
@@ -36,25 +35,11 @@ public class RFIDAccess extends Applet {
         
         connect();
         
-        toDraw="initdone";
-        
         try {
             jso = JSObject.getWindow(this);
         } catch (JSException e) {
             // TODO Auto-generated catch block
-            toDraw="error jsobject";
         }
-        
-        
-        repaint();
-    }
-    
-    public void paint(Graphics g)
-    { 
-//method to draw text on screen 
-// String first, then x and y coordinate. 
-     g.drawString("Hey "+ toDraw,20,20); 
-
     }
     
     public void read() {
@@ -63,17 +48,17 @@ public class RFIDAccess extends Applet {
             test = rfidReader.readEPC();
             System.out.println(test.length);
             for (int i = 0; i < test.length; i++) {
-                toDraw=test[i];
-                idRead=toDraw;
+                idRead=test[i];
+                System.out.println("idRead: "+idRead);
             }
         } catch (IOException e) {
             // TODO Auto-generated catch block
+            idRead="error";
             e.printStackTrace();
         }
         
-        repaint();
-        
         printResult();
+        readResult();
     }
     
     public void connect() {
@@ -92,6 +77,36 @@ public class RFIDAccess extends Applet {
         }
         catch (Exception ex) {
                 ex.printStackTrace();
+        }
+    }
+    
+    public void readResult() {
+        try {
+            jso.call("readResult", new String[] {String.valueOf(idRead)});
+        }
+        catch (Exception ex) {
+                ex.printStackTrace();
+        }
+    }
+    
+    public void writeResult(String result) {
+        try {
+            jso.call("writeResult", new String[] {result});
+        }
+        catch (Exception ex) {
+                ex.printStackTrace();
+        }
+    }
+    
+    public void write(String id) {
+        String query="UPDATE tag_id SET id="+id+" WHERE protocol_id='GEN2' AND antenna_id=1;";
+        try {
+            rfidReader.executeQuery(query);
+            System.out.println("writed");
+            writeResult("writed");
+        } catch (IOException ex) {
+            System.out.println(ex);
+            writeResult("error");
         }
     }
     
